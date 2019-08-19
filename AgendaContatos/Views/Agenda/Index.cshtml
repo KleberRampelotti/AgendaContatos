@@ -1,0 +1,67 @@
+﻿<h3>CONTATOS</h3>
+<br />
+
+<div class="form-group">
+    <button type="button" class="btn btn-success" onclick="CriarContato()">Cadastrar Contato</button>
+    <button type="button" class="btn btn-warning" onclick="PesquisarContato()">Pesquisar</button>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Logradouro</th>
+            <th>Numero</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Email</th>
+            <th>Telefone Residencial</th>
+            <th>Telefone Celular</th>
+            <th>Observação</th>            
+        </tr>
+    </thead>
+
+    @{
+        foreach (var item in (List<AgendaModel>)ViewBag.ListaAgenda)
+        { 
+            <tbody>
+                <tr>
+                    <td><button type="button" class="btn btn-primary" onclick="Editar(@item.id.ToString())">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger" onclick="Excluir(@item.id.ToString())">Excluir</button></td>
+                    <td>@item.nome.ToString()</td>
+                    <td>@item.logradouro.ToString()</td>
+                    <td>@item.numero.ToString()</td>
+                    <td>@item.bairro.ToString()</td>
+                    <td>@item.cidade.ToString()</td>
+                    <td>@item.estado.ToString()</td>
+                    <td>@item.email.ToString()</td>
+                    <td>@item.tel_residencial.ToString()</td>
+                    <td>@item.tel_celular.ToString()</td>
+                    <td>@item.observacao.ToString()</td>                    
+                </tr>
+            </tbody>
+        }
+    }
+</table>
+
+<script>
+    function CriarContato() {
+        window.location.href = "../Agenda/CriarContato/";
+    }
+
+    function Editar(id_contato) {
+        window.location.href = "../Agenda/CriarContato/" + id_contato;
+    }
+
+    function Excluir(id_contato) {
+        window.location.href = "../Agenda/ExcluirContato/" + id_contato;
+    }
+
+    function PesquisarContato() {
+        window.location.href = "../Agenda/PesquisarContato/";
+    }
+</script>
+

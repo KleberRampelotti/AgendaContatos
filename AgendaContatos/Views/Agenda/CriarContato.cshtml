@@ -1,0 +1,104 @@
+﻿@model AgendaModel
+
+@{
+    var vId = 0;
+    var vNome = "";
+    var vLogradouro = "";    
+    var vNumero = 0;    
+    var vBairro = "";    
+    var vCidade = "";    
+    var vEstado = "";    
+    var vEmail = "";    
+    var vTelefoneResidencial = "";    
+    var vTelefoneCelular = "";    
+    var vObservacao = "";          
+
+    try
+    {
+        vId = int.Parse(ViewBag.Registro.id.ToString());
+        vNome = @ViewBag.Registro.nome.ToString();
+        vLogradouro = ViewBag.Registro.logradouro.ToString();
+        vNumero = int.Parse(ViewBag.Registro.numero.ToString());
+        vBairro = ViewBag.Registro.bairro.ToString();
+        vCidade = ViewBag.Registro.cidade.ToString();
+        vEstado = ViewBag.Registro.estado.ToString();
+        vEmail = ViewBag.Registro.email.ToString();
+        vTelefoneResidencial = ViewBag.Registro.tel_residencial.ToString();
+        vTelefoneCelular = ViewBag.Registro.tel_celular.ToString();
+        vObservacao = ViewBag.Registro.observacao.ToString();        
+    }
+    catch { }
+}
+
+<h3>Criar Contato</h3>
+
+<form asp-controller="Agenda" asp-action="CriarContato">
+
+    <input type="hidden" asp-for="id" value="@vId" />
+
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" asp-for="nome" value="@vNome" maxlength="100">
+        <span asp-validation-for="nome" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="logradouro">Logradouro:</label>
+        <input type="text" class="form-control" asp-for="logradouro" value="@vLogradouro" maxlength="60">
+    </div>
+
+    <div class="form-group">
+        <label for="numero">Numero:</label>
+        <input type="text" class="form-control" asp-for="numero" value="@vNumero" maxlength="11">
+    </div>
+
+    <div class="form-group">
+        <label for="bairro">Bairro:</label>
+        <input type="text" class="form-control" asp-for="bairro" value="@vBairro" maxlength="45">
+    </div>
+
+    <div class="form-group">
+        <label for="cidade">Cidade:</label>
+        <input type="text" class="form-control" asp-for="cidade" value="@vCidade" maxlength="45">
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" class="form-control" asp-for="estado" value="@vEstado" maxlength="45">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" asp-for="email" value="@vEmail" maxlength="100">
+    </div>
+
+    <div class="form-group">
+        <label for="tel_residencial">Telefone Residencial:</label>
+        <input type="tel" class="form-control" asp-for="tel_residencial" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}" placeholder="99-9999-9999"
+               value="@vTelefoneResidencial" maxlength="15">
+    </div>
+
+    <div class="form-group">
+        <label for="tel_celular">Telefone Celular:</label>
+        <input type="tel" class="form-control" asp-for="tel_celular" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" placeholder="99-99999-9999"
+               value="@vTelefoneCelular" maxlength="15">
+    </div>
+
+    <div class="form-group">
+        <label for="observacao">Observacao:</label>
+        <input type="text" class="form-control" asp-for="observacao" value="@vObservacao" maxlength="200">
+    </div>
+    
+    <br>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Salvar</button> 
+        <button type="button" class="btn btn-danger" onclick="Cancelar()">Cancelar</button>
+    </div>
+</form>
+
+<script>    
+    function Cancelar() {
+        window.location.href = "../../Agenda/Index";
+    }      
+</script>

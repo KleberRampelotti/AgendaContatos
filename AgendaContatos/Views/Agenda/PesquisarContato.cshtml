@@ -1,0 +1,69 @@
+﻿@model AgendaModel
+
+<h2>Pesquisar Contato</h2>
+<br />
+
+<div class="container alert-dark">
+    <form asp-controller="Agenda" asp-action="PesquisarContato">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" asp-for="NomeFiltro" maxlength="100">
+
+            <label>Tel Residencial:</label>
+            <input type="text" asp-for="TelResFiltro" pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}" placeholder="99-9999-9999" maxlength="15">
+
+            <label>Tel Celular:</label>
+            <input type="text" asp-for="TelCelFiltro" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" placeholder="99-99999-9999" width="50" maxlength="15">
+
+            <button type="submit" class="btn btn-success">Pesquisar</button>
+        </div>
+    </form>
+</div>
+<br />
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Logradouro</th>
+            <th>Numero</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Email</th>
+            <th>Telefone Residencial</th>
+            <th>Telefone Celular</th>
+            <th>Observação</th>            
+        </tr>
+    </thead>
+
+    @{
+        foreach (var item in (List<AgendaModel>)ViewBag.ListaAgenda)
+        {
+            <tbody>
+                <tr>
+                    <td><button type="button" class="btn btn-primary" onclick="Editar(@item.id.ToString())">Editar</button></td>
+                    <td>@item.id.ToString()</td>
+                    <td>@item.nome.ToString()</td>
+                    <td>@item.logradouro.ToString()</td>
+                    <td>@item.numero.ToString()</td>
+                    <td>@item.bairro.ToString()</td>
+                    <td>@item.cidade.ToString()</td>
+                    <td>@item.estado.ToString()</td>
+                    <td>@item.email.ToString()</td>
+                    <td>@item.tel_residencial.ToString()</td>
+                    <td>@item.tel_celular.ToString()</td>
+                    <td>@item.observacao.ToString()</td>                    
+                </tr>
+            </tbody>
+        }
+    }
+</table>
+
+<script>
+    function Editar(id_contato) {
+        window.location.href = "../CriarContato/" + id_contato;
+    }  
+</script>
